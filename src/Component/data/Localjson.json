@@ -1,0 +1,94 @@
+{
+  "userData": [
+    {
+      "id": "c1f5",
+      "email": "abc123@gm.cogws",
+      "symbol": "PEGY",
+      "data": {
+        "type": "stock",
+        "price": 0.5072,
+        "image": "https://financialmodelingprep.com/image-stock/PEGY.png"
+      }
+    },
+    {
+      "id": "8708",
+      "email": "abc123@gm.cogws",
+      "symbol": "APPLX",
+      "data": {
+        "type": "stock",
+        "price": 13.93,
+        "image": "https://financialmodelingprep.com/image-stock/APPLX.png"
+      }
+    },
+    {
+      "id": "d2e0",
+      "email": "saptangsumodak@gmail.com",
+      "symbol": "WSHNX",
+      "data": {
+        "type": "stock",
+        "price": 11.84,
+        "image": "https://financialmodelingprep.com/image-stock/WSHNX.png"
+      }
+    },
+    {
+      "id": "b03d",
+      "email": "saptangsumodak@gmail.com",
+      "symbol": "AAPL",
+      "data": {
+        "type": "stock",
+        "price": 185.85,
+        "image": "https://financialmodelingprep.com/image-stock/AAPL.png"
+      }
+    },
+    {
+      "id": "54ef",
+      "email": "saptangsumodak@gmail.com",
+      "symbol": "solana",
+      "data": {
+        "type": "crypto",
+        "price": -940646978.7057,
+        "image": "https://assets.coingecko.com/coins/images/4128/large/solana.png?1696504756"
+      }
+    },
+    {
+      "id": "64c7",
+      "email": "rokmodak@gmail.com",
+      "symbol": "CORZ",
+      "data": {
+        "type": "stock",
+        "price": 3.79,
+        "image": "https://financialmodelingprep.com/image-stock/CORZ.jpg"
+      }
+    },
+    {
+      "id": "2a15",
+      "email": "madhu123@gmail.com",
+      "symbol": "bitcoin",
+      "data": {
+        "type": "crypto",
+        "price": 38037967755,
+        "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400"
+      }
+    },
+    {
+      "id": "3249",
+      "email": "madhu123@gmail.com",
+      "symbol": "tether",
+      "data": {
+        "type": "crypto",
+        "price": 235130734,
+        "image": "https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661"
+      }
+    },
+    {
+      "id": "6d87",
+      "email": "madhu123@gmail.com",
+      "symbol": "BLUE",
+      "data": {
+        "type": "stock",
+        "price": 1.51,
+        "image": "https://financialmodelingprep.com/image-stock/BLUE.png"
+      }
+    }
+  ]
+}

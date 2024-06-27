@@ -1,0 +1,243 @@
+.options {
+	background-image: url("Analyze-invest-learn-bg.svg");
+	width: 100%;
+	height: 60vh;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	margin: 40px 0 60px;
+}
+.optionBox {
+	display: flex;
+	width: 90%;
+	justify-content: space-around;
+	height: 100%;
+}
+
+.options .optionBox .cards {
+	width: 25%;
+	height: 95%;
+	background-color: #fff;
+}
+
+.options .optionBox .cards:hover {
+	transform: scale(1.05) translateY(3%);
+	box-shadow: 5px 6px rgba(128, 128, 128, 0.519);
+	transition: all 0.2s;
+}
+
+.options .optionBox .cards:hover .optionButton {
+	background-color: black;
+	color: #fff;
+}
+.options .optionBox .cards:hover .buttonText {
+	display: block;
+	margin-bottom: 10px;
+}
+.buttonText {
+	margin-bottom: 20px;
+	display: none;
+}
+.options .optionBox .cards .optionButton {
+	border-radius: 20px;
+}
+
+.newsContainer {
+	margin: 30px 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-bottom: 50px;
+}
+
+.newsContainer .cards {
+	margin: 3em 2em;
+	width: 20em;
+	height: 20em;
+	border: 1px solid black;
+}
+
+.newsContainer .cards .newsImage {
+	width: 100%;
+	height: 8rem;
+	background-color: blue;
+}
+
+/*header*/
+
+.header_logo {
+	margin-right: 50px;
+	width: 10px;
+	height: 10px;
+	border-radius: 20px;
+}
+.header-position {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.stock-tab {
+	margin-left: 0;
+	box-sizing: border-box;
+	/* justify-content: space-between; */
+}
+
+.stock-slider {
+	display: flex;
+	justify-content: flex-start;
+	background-color: black;
+	overflow: hidden;
+}
+.stock-sections {
+	font-size: 18px;
+	color: white;
+	-webkit-text-stroke-width: 0.1px;
+	-webkit-text-stroke-color: wheat;
+	white-space: nowrap;
+	padding: 0 1rem;
+	letter-spacing: 1px;
+	animation: move 7000ms linear infinite;
+	display: flex;
+}
+#uparrow,
+#downarrow {
+	display: flex;
+	color: green;
+}
+#downarrow {
+	color: red;
+}
+
+@keyframes move {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+/*footer*/
+
+#footer {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	flex-direction: column;
+	background-color: #0f2167;
+	position: relative;
+	bottom: 0;
+}
+
+#footer-containers {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1px solid white;
+}
+
+#footer-links-containers {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+#footer-links a {
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	color: white;
+}
+
+#footer-links a:hover {
+	text-decoration: underline;
+}
+#app-icons {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	border-bottom: 1px solid #626262;
+	border-top: 1px solid #626262;
+	justify-content: space-between;
+	color: white;
+}
+
+/* #payment-footer{
+  font-size: 10px;
+  justify-content: space-between;
+
+} */
+
+.App {
+	width: 100%;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	/* display: flex;
+  flex-direction: column; */
+}
+
+.login_form {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
+.signup_form {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+.login-card {
+	width: 300px;
+	height: 100%;
+}
+
+.watchList-head {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	background-color: #eeeeeeda;
+	color: rgb(76, 185, 231);
+}
+.watchList-head span {
+	font-size: larger;
+	padding-bottom: 3px;
+	font-weight: 500;
+}
+
+.tableRow:hover {
+	transform: scale(1.1) translateX(4%);
+	box-shadow: 2px 2px 10px rgba(128, 128, 128, 0.519);
+	transition: all 0.2s;
+}
+
+.popContainer {
+	background-color: green;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	display: none;
+}
+.show {
+	display: block;
+}
+.login-btn-pop {
+	background-color: red;
+	color: white;
+	font-size: 0.8em;
+	padding: 0 6px;
+	position: absolute;
+	z-index: 100;
+	transform: translate(1px, 5px);
+	border: none;
+	border-radius: 50px;
+}
