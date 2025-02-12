@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//asios get finction that can be reused
+//axios get function that can be reused
 // --"?"means its an optional parameter
 const fetchData = (apiLink: string, params?: object) => {
 	return axios.get(apiLink, params ? { params } : {});

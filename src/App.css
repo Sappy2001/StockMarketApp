@@ -83,14 +83,20 @@
 .stock-tab {
 	margin-left: 0;
 	box-sizing: border-box;
-	/* justify-content: space-between; */
+	width: 100%;
+	overflow: hidden;
+	background-color: black;
+	padding-left: 50%;
 }
 
 .stock-slider {
-	display: flex;
+	display: inline-flex;
 	justify-content: flex-start;
 	background-color: black;
 	overflow: hidden;
+	white-space: nowrap;
+	animation: move 55000ms linear infinite;
+	box-sizing: content-box;
 }
 .stock-sections {
 	font-size: 18px;
@@ -100,7 +106,6 @@
 	white-space: nowrap;
 	padding: 0 1rem;
 	letter-spacing: 1px;
-	animation: move 7000ms linear infinite;
 	display: flex;
 }
 #uparrow,

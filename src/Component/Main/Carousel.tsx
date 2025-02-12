@@ -3,6 +3,7 @@ import { TrendingCoins } from "../services/apiservices";
 import AliceCarousel from "react-alice-carousel";
 
 const Carousel = () => {
+	let stocks: any = true;
 	const [trending, seTrending] = useState([
 		{
 			image: "",
@@ -16,23 +17,23 @@ const Carousel = () => {
 		try {
 			const { data } = await TrendingCoins("inr");
 			seTrending(data);
-			console.log(data);
+			// console.log(data);
 		} catch (err) {
 			console.log(err + "at Carousel");
 		}
 	};
 
-	console.log(trending);
+	// console.log(trending);
 	useEffect(() => {
 		fetchtrendingcoins();
 	}, []);
 
 	const responsive = {
 		0: {
-			items: 2,
+			items: stocks ? 3 : 2,
 		},
 		520: {
-			items: 4,
+			items: stocks ? 6 : 4,
 		},
 	};
 
@@ -70,8 +71,8 @@ const Carousel = () => {
 				mouseTracking
 				infinite
 				autoPlay
-				animationDuration={1500}
-				autoPlayInterval={1000}
+				animationDuration={1000}
+				autoPlayInterval={500}
 				disableButtonsControls
 				disableDotsControls
 				// how many items to show according to screen size
