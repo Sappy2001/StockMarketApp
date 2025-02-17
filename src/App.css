@@ -88,6 +88,14 @@
 	background-color: black;
 	padding-left: 50%;
 }
+.stock-tabNotLoaded {
+	margin-left: 0;
+	box-sizing: border-box;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+}
 
 .stock-slider {
 	display: inline-flex;

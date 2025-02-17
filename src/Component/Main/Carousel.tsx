@@ -42,10 +42,16 @@ const Carousel = () => {
 		return (
 			<>
 				<img
-					src={coins.image}
+					//if image link has large img make it small(faster loading)
+					src={
+						coins.image.includes("/large/")
+							? coins.image.replace("/large/", "/small/")
+							: coins.image
+					}
 					alt={coins.name}
-					height="80"
+					height="70"
 					style={{ marginBottom: 10 }}
+					loading="lazy"
 				/>
 				<span
 					style={{
@@ -53,6 +59,7 @@ const Carousel = () => {
 						textTransform: "uppercase",
 						fontWeight: 600,
 						color: "blue",
+						marginLeft: "5px",
 					}}
 				>
 					{coins.symbol}

@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import "./App.css";
 import { getNewsData } from "./Component/services/apiservices";
-import StockTable from "./Component/Tables/StockTable";
-import CryptoTable from "./Component/Tables/CryptoTable";
-import StockNews from "./Component/Header/StockNews";
 import Header from "./Component/Header/header";
 import Footer from "./Component/Footer/footer";
-import Login from "./Component/Login/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Signup from "./Component/Signup/signup";
-import Dashboard from "./Component/Dashboard/Dashboard";
 import StockPage from "./Component/Pages/StockPage";
 import { AuthProvider, useAuth } from "./Auth/authProvider";
 import CoinPage from "./Component/Pages/CoinPage";
-import NewsContainer from "./Component/NewsContainer/NewsContainer";
 import WatchList from "./Component/Pages/WatchList";
-import About from "./Component/Header/about";
 import { WatchListProvider } from "./Component/Context/watchListContext";
+import StockNews from "./Component/Header/StockNews";
+import Dashboard from "./Component/Dashboard/Dashboard";
+import NewsContainer from "./Component/NewsContainer/NewsContainer";
+import StockTable from "./Component/Tables/StockTable";
+import CryptoTable from "./Component/Tables/CryptoTable";
+
+//Lazy loading with dynamic import() for secondary routes
+const Login = React.lazy(() => import("./Component/Login/login"));
+const Signup = React.lazy(() => import("./Component/Signup/signup"));
+const About = React.lazy(() => import("./Component/Header/about"));
 
 // Interface for a news article
 interface NewsItem {
@@ -73,22 +75,56 @@ function App() {
 						{/* StockNews and Header components */}
 
 						<StockNews />
+
 						<Header />
 
 						<Routes>
 							<Route path="/" element={<Dashboard />} />
-							<Route path="/stock" element={<StockTable />} />
-							<Route path="/news" element={<NewsContainer news={news} />} />
+							<Route
+								path="/stock"
+								element={<StockTable />}
+								loader={() => import("./Component/Tables/StockTable")} // Preload on hover or interaction
+							/>
+							<Route
+								path="/news"
+								element={<NewsContainer news={news} />}
+								loader={() => import("./Component/NewsContainer/NewsContainer")}
+							/>
 
 							{/* props are used to send the value */}
 
-							<Route path="/crypto" element={<CryptoTable />} />
+							<Route
+								path="/crypto"
+								element={<CryptoTable />}
+								loader={() => import("./Component/Tables/CryptoTable")} // Preload on hover or interaction
+							/>
 
-							<Route path="/about" element={<About />} />
+							<Route
+								path="/about"
+								element={
+									<Suspense fallback={<div>Loading navbar</div>}>
+										<About />
+									</Suspense>
+								}
+							/>
 
-							<Route path="/login" element={<Login />} />
+							<Route
+								path="/login"
+								element={
+									<Suspense fallback={<div>Loading navbar</div>}>
+										<Login />
+									</Suspense>
+								}
+							/>
 
-							<Route path="/signup" element={<Signup />} />
+							<Route
+								path="/signup"
+								element={
+									<Suspense fallback={<div>Loading navbar</div>}>
+										<Signup />
+									</Suspense>
+								}
+							/>
 
 							{/* the ":id" means id here is a dynmic value and when someone is */}
 							{/* /redirecting to such a link StockPage gets rendered */}
@@ -96,6 +132,7 @@ function App() {
 							<Route path="/crypto/:id" element={<CoinPage />} />
 							<Route path="watchList" element={<WatchList />} />
 						</Routes>
+
 						<Footer />
 					</WatchListProvider>
 				</AuthProvider>
