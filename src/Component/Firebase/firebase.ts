@@ -1,19 +1,17 @@
 // import firebase from "firebase/app";
 // import "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getAuth } from 'firebase/auth';
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyALgJNMITGUO12YSBbgPvOrdihvXW0-3L4",
-  authDomain: "stockmarket09.firebaseapp.com",
-  databaseURL: "https://stockmarket09-default-rtdb.firebaseio.com",
-  projectId: "stockmarket09",
-  storageBucket: "stockmarket09.appspot.com",
-  messagingSenderId: "406396332810",
-  appId: "1:406396332810:web:c384836f3470c32a80a8f3"
-
+	apiKey: "AIzaSyDyeoQyHcqawni5Q6uUJPR1pXIiyu1PEX8",
+	authDomain: "fir-noteproject-d5a99.firebaseapp.com",
+	projectId: "fir-noteproject-d5a99",
+	storageBucket: "fir-noteproject-d5a99.firebasestorage.app",
+	messagingSenderId: "832892069960",
+	appId: "1:832892069960:web:ebf17c170b6ca4d2e9507d",
+	measurementId: "G-XLSJL3VNVR",
 };
-
 // Initialize Firebase
 
 // export default firebaseConfig;
@@ -21,4 +19,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 export { auth };
-

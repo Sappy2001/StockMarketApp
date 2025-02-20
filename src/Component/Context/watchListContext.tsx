@@ -28,6 +28,7 @@ type watchdata = WatchListType extends "crypto"
 type WatchListContext<Type extends WatchListType> = {
 	openWatchList: () => void;
 	closeWatchList: () => void;
+	fetchWatchedData: () => void;
 	addToWatch: (
 		id: string,
 		type: Type,
@@ -60,30 +61,31 @@ export function WatchListProvider({ children }: WatchListProviderProps) {
 	const [watchItems, setWatchItems] = useState<WatchItem[]>([]);
 	const fetchWatchedData = async () => {
 		try {
-			const res = await getWatchListedData(user?.email);
-
-			const updatedWatchItems = res.data.map((item: any) => {
-				let data: watchdata;
-				if (item.data.type === "crypto") {
-					data = {
-						image: item.data.image,
-						symbol: item.symbol,
-						price: item.data.price,
+			if (user) {
+				const res = await getWatchListedData(user?.email);
+				const updatedWatchItems = res.data.userItems.map((item: any) => {
+					let data: watchdata;
+					if (item.data.type === "crypto") {
+						data = {
+							image: item.data.image,
+							symbol: item.symbol,
+							price: item.data.price,
+						};
+					} else {
+						data = {
+							image: item.data.image,
+							symbol: item.symbol,
+							price: item.data.price,
+						};
+					}
+					return {
+						id: item.id,
+						type: item.data.type,
+						data: data,
 					};
-				} else {
-					data = {
-						image: item.data.image,
-						symbol: item.symbol,
-						price: item.data.price,
-					};
-				}
-				return {
-					id: item.id,
-					type: item.data.type,
-					data: data,
-				};
-			});
-			setWatchItems(updatedWatchItems);
+				});
+				setWatchItems(updatedWatchItems);
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -92,7 +94,7 @@ export function WatchListProvider({ children }: WatchListProviderProps) {
 
 	useEffect(() => {
 		fetchWatchedData();
-	}, [getWatchQuantity, watchItems, user]);
+	}, [user]);
 
 	const openWatchList = () => setIsOpen(true);
 	const closeWatchList = () => setIsOpen(false);
@@ -118,6 +120,7 @@ export function WatchListProvider({ children }: WatchListProviderProps) {
 	return (
 		<WatchListContext.Provider
 			value={{
+				fetchWatchedData,
 				getWatchQuantity,
 				addToWatch,
 				removeFromWatch,

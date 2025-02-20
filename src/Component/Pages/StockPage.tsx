@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
 	addToWatchList,
@@ -16,13 +16,14 @@ import {
 
 import { LineComponent } from "./LineComponent";
 import { useAuth } from "../../Auth/authProvider";
+import { useWatchList } from "../Context/watchListContext";
 
 //defining the type of button -string not accpted by mui
 
 const StockPage = () => {
 	const user = useAuth();
 	const nav = useNavigate();
-
+	const { fetchWatchedData } = useWatchList();
 	const handleButtonClick = (buttonType: string) => {
 		setButtonInfo(buttonType);
 	};
@@ -47,31 +48,49 @@ const StockPage = () => {
 
 	const [chartData, setChartData] = useState([{ date: "" }]);
 
-	const getStockdata = async () => {
-		try {
-			const { data } = await getCompanyInfo(id);
-			setStock(data);
-			console.log(data);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	// const getStockdata = async () => {
+	// 	try {
+	// 		const { data } = await getCompanyInfo(id);
+	// 		setStock(data);
+	// 		console.log(data);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
-	const fetchHistoricData = async () => {
+	// const fetchHistoricData = async () => {
+	// 	setloading(true);
+	// 	try {
+	// 		const { data } = await historicalStockData(buttonInfo, `${id}`);
+	// 		setChartData(data);
+	// 		setloading(false);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
+
+	//merging above two api calls with Promise.all
+	const fetchData = async () => {
 		setloading(true);
 		try {
-			const { data } = await historicalStockData(buttonInfo, `${id}`);
-			setChartData(data);
+			const [comapanyData, historicData] = await Promise.all([
+				getCompanyInfo(id),
+				historicalStockData(buttonInfo, `${id}`),
+			]);
+			setStock(comapanyData.data);
+			setChartData(historicData.data);
+		} catch (err) {
+			console.log("error fetching data", err);
+		} finally {
 			setloading(false);
-		} catch (error) {
-			console.log(error);
 		}
 	};
 	console.log(chartData);
 	useEffect(() => {
-		getStockdata();
-		fetchHistoricData();
-	}, [buttonInfo]);
+		// getStockdata();
+		// fetchHistoricData();
+		fetchData();
+	}, [id, buttonInfo]);
 
 	const stockData = {
 		type: "stock",
@@ -109,6 +128,10 @@ const StockPage = () => {
 		price: chartData?.slice(0, 20).map((stock: any) => stock?.close),
 		name: id,
 		userTime: buttonInfo,
+	};
+	const watchListFunction = async () => {
+		const res = await addToWatchList(user?.email, id, stockData);
+		if (res) fetchWatchedData();
 	};
 	return (
 		<div className="stockpage">
@@ -203,7 +226,7 @@ const StockPage = () => {
 									variant="contained"
 									color="error"
 									onClick={() => {
-										addToWatchList(user.email, id, stockData);
+										watchListFunction();
 									}}
 								>
 									Add to WatchList

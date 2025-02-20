@@ -16,11 +16,13 @@ import {
 
 import { LineComponent } from "./LineComponent";
 import { useAuth } from "../../Auth/authProvider";
+import { useWatchList } from "../Context/watchListContext";
 
 //defining the type of button -string not accpted by mui
 
 const CoinPage = () => {
 	const nav = useNavigate();
+	const { fetchWatchedData } = useWatchList();
 	// getting the data from authprovider by useContext
 	const user = useAuth();
 	console.log(user);
@@ -102,6 +104,10 @@ const CoinPage = () => {
 		type: "crypto",
 		price: coin.market_data.market_cap_change_24h,
 		image: coin.image.large,
+	};
+	const watchListFunction = async () => {
+		const res = await addToWatchList(user?.email, id, coinData);
+		if (res) fetchWatchedData();
 	};
 	return (
 		<div className="stockpage">
@@ -201,7 +207,7 @@ const CoinPage = () => {
 								variant="contained"
 								color="error"
 								onClick={() => {
-									addToWatchList(user.email, id, coinData);
+									watchListFunction();
 								}}
 							>
 								Add to WatchList

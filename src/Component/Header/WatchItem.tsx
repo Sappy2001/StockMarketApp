@@ -6,10 +6,14 @@ import {
 import watchListData from "../data/Localjson.json";
 import { Button, Stack } from "react-bootstrap";
 import { deleteWatchListItem } from "../services/apiservices";
+import { useAuth } from "../../Auth/authProvider";
+
 const watchListItems = watchListData.userData;
+
 const WatchItem = ({ id, data, type }: WatchItemProps) => {
-	const { removeFromWatch } = useWatchList();
-	if (watchListItems.length == 0) return null;
+	const user = useAuth();
+	const { removeFromWatch, getWatchQuantity } = useWatchList();
+	if (watchListItems.length === 0) return null;
 	return (
 		<Stack direction="horizontal" gap={3} className="d-flex align-items-center">
 			<img
@@ -28,7 +32,7 @@ const WatchItem = ({ id, data, type }: WatchItemProps) => {
 				<Button
 					variant="danger"
 					onClick={() => {
-						deleteWatchListItem(id);
+						deleteWatchListItem(id, user?.email);
 						removeFromWatch(id);
 					}}
 				>

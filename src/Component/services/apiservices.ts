@@ -3,6 +3,7 @@ import axios from "axios";
 //axios get function that can be reused
 // --"?"means its an optional parameter
 const fetchData = (apiLink: string, params?: object) => {
+	console.log(params);
 	return axios.get(apiLink, params ? { params } : {});
 };
 
@@ -58,27 +59,34 @@ const historicalStockData = (time: string, symbol: string) => {
 	);
 };
 
-const getWatchListedData = (email: any) => {
-	return fetchData("http://localhost:1999/userData", {
-		email: email,
+const getWatchListedData = async (email: any) => {
+	const data = await fetchData("http://localhost:5000/items/fetchUserItems", {
+		email,
 	});
+	console.log(data);
+	return data;
 };
 
 const addToWatchList = (email: any, symbol: any, data: any) => {
-	axios
-		.post("http://localhost:1999/userData", {
+	return axios
+		.post("http://localhost:5000/items/saveItem", {
 			email: email,
 			symbol: symbol,
 			data: data,
 		})
 		.then((res) => {
 			alert(data.type + " added to the watchlist");
+			getWatchListedData(email);
+			return res.data.success;
 		})
-		.catch((err) => alert(err));
+		.catch((err) => {
+			alert(err.data.msg);
+			return err.data.success;
+		});
 };
 
-const deleteWatchListItem = (id: any) => {
-	return axios.delete(`http://localhost:1999/userData/${id}`);
+const deleteWatchListItem = (id: any, email: any) => {
+	return axios.delete(`http://localhost:1999/userData/${id}`, email);
 };
 
 export {

@@ -130,7 +130,7 @@ function App() {
 							{/* /redirecting to such a link StockPage gets rendered */}
 							<Route path="/stock/:id" element={<StockPage />} />
 							<Route path="/crypto/:id" element={<CoinPage />} />
-							<Route path="watchList" element={<WatchList />} />
+							<Route path="/watchList" element={<WatchList />} />
 						</Routes>
 
 						<Footer />

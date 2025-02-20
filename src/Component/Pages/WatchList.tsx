@@ -15,8 +15,8 @@ const WatchList = () => {
 	const fetchWatchedData = async () => {
 		try {
 			const res = await getWatchListedData(user?.email);
-			console.log(res);
-			setList(res.data);
+			console.log(res.data.userItems);
+			setList(res.data.userItems);
 		} catch (err) {
 			console.log(err);
 		}
@@ -25,7 +25,7 @@ const WatchList = () => {
 	//   useEffect(() => {}, [itemRemoved]);
 	useEffect(() => {
 		fetchWatchedData();
-	}, [itemRemoved, list, user]);
+	}, [itemRemoved, user]);
 
 	return (
 		<div>
@@ -72,7 +72,7 @@ const WatchList = () => {
 												}}
 												onClick={() => {
 													setItemRemoved(item.symbol);
-													deleteWatchListItem(item.id);
+													deleteWatchListItem(item.id, user?.email);
 												}}
 											>
 												<DeleteForeverIcon />
