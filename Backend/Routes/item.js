@@ -36,7 +36,7 @@ router.post(
 			res.send({ savedItem, success: true });
 		} catch (error) {
 			console.log(error.message);
-			res.status(500).send({ msg: "Internal Server Error", success: false });
+			res.status(500).send({ message: error.message, success: false });
 		}
 	}
 );

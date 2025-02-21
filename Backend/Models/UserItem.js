@@ -6,6 +6,7 @@ const UserItemSchema = new mongoose.Schema({
 	},
 	symbol: {
 		type: String,
+		unique: true,
 		required: true,
 	},
 	data: {

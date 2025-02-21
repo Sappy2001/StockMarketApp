@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 //testing port
 app.get("/", (req, res) => {
-	res.send("Hello Connected");
+	res.send("Hello You are Connected to StockAppBackend");
 });
 app.use("/items", router);
 

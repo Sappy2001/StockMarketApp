@@ -8,6 +8,8 @@ const fetchData = (apiLink: string, params?: object) => {
 };
 
 const stockapi = process.env.REACT_APP_stockapiKey;
+const backend = process.env.REACT_APP_BackendURL;
+
 const getNewsData = () => {
 	return fetchData(
 		`https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=${process.env.REACT_APP_newsApiKey}`
@@ -60,16 +62,16 @@ const historicalStockData = (time: string, symbol: string) => {
 };
 
 const getWatchListedData = async (email: any) => {
-	const data = await fetchData("http://localhost:5000/items/fetchUserItems", {
+	const data = await fetchData(`${backend}/items/fetchUserItems`, {
 		email,
 	});
 	console.log(data);
 	return data;
 };
 
-const addToWatchList = (email: any, symbol: any, data: any) => {
+const addToWatchList = async (email: any, symbol: any, data: any) => {
 	return axios
-		.post("http://localhost:5000/items/saveItem", {
+		.post(`${backend}/items/saveItem`, {
 			email: email,
 			symbol: symbol,
 			data: data,
@@ -80,8 +82,9 @@ const addToWatchList = (email: any, symbol: any, data: any) => {
 			return res.data.success;
 		})
 		.catch((err) => {
-			alert(err.data.msg);
-			return err.data.success;
+			console.log(err.response.data.message);
+			alert(err.response.data.message);
+			return err.response.data.success;
 		});
 };
 
