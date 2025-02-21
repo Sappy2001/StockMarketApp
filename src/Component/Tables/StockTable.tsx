@@ -29,7 +29,6 @@ const StockTable = () => {
 		setLoading(true);
 		try {
 			const res = await getStockdata();
-			// console.log(res)
 			setStock(res.data);
 			setLoading(false);
 		} catch (error) {
@@ -46,7 +45,6 @@ const StockTable = () => {
 	};
 
 	const handleSearch = () => {
-		// console.log(stock)
 		return stock.filter((st) => {
 			return (
 				st.exchangeShortName?.toLowerCase().includes(search) ||

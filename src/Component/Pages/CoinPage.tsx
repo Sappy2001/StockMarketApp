@@ -25,7 +25,6 @@ const CoinPage = () => {
 	const { fetchWatchedData } = useWatchList();
 	// getting the data from authprovider by useContext
 	const user = useAuth();
-	console.log(user);
 	const handleButtonClick = (buttonType: string) => {
 		setButtonInfo(buttonType);
 	};
@@ -58,7 +57,6 @@ const CoinPage = () => {
 	const getCoinData = async () => {
 		try {
 			const { data } = await SingleCoin(id);
-			console.log(data);
 			setCoin(data);
 		} catch (err) {
 			console.log(err);
@@ -75,8 +73,7 @@ const CoinPage = () => {
 			console.log(error);
 		}
 	};
-	console.log(coin);
-	console.log(chartData);
+
 	useEffect(() => {
 		getCoinData();
 		fetchHistoricData();

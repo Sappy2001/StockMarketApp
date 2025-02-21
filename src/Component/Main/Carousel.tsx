@@ -17,13 +17,11 @@ const Carousel = () => {
 		try {
 			const { data } = await TrendingCoins("inr");
 			seTrending(data);
-			// console.log(data);
 		} catch (err) {
 			console.log(err + "at Carousel");
 		}
 	};
 
-	// console.log(trending);
 	useEffect(() => {
 		fetchtrendingcoins();
 	}, []);

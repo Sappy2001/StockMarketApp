@@ -62,7 +62,6 @@ const CryptoTable = () => {
 	const showList = () => {};
 
 	const handleChange = (event: any, value: any) => {
-		console.log(value);
 		setPage(value);
 	};
 	return (

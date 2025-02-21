@@ -6,9 +6,7 @@ const { body, validationResult } = require("express-validator");
 //getting all items
 router.get("/fetchUserItems", async (req, res) => {
 	try {
-		console.log(req.query.email);
 		const userItems = await UserItem.find({ email: req.query.email });
-		console.log({ userItems });
 		res.send({ userItems });
 	} catch (err) {
 		console.log(err.message);

@@ -48,27 +48,6 @@ const StockPage = () => {
 
 	const [chartData, setChartData] = useState([{ date: "" }]);
 
-	// const getStockdata = async () => {
-	// 	try {
-	// 		const { data } = await getCompanyInfo(id);
-	// 		setStock(data);
-	// 		console.log(data);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
-
-	// const fetchHistoricData = async () => {
-	// 	setloading(true);
-	// 	try {
-	// 		const { data } = await historicalStockData(buttonInfo, `${id}`);
-	// 		setChartData(data);
-	// 		setloading(false);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
 	//merging above two api calls with Promise.all
 	const fetchData = async () => {
 		setloading(true);
@@ -85,10 +64,7 @@ const StockPage = () => {
 			setloading(false);
 		}
 	};
-	console.log(chartData);
 	useEffect(() => {
-		// getStockdata();
-		// fetchHistoricData();
 		fetchData();
 	}, [id, buttonInfo]);
 

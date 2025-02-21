@@ -3,7 +3,6 @@ import axios from "axios";
 //axios get function that can be reused
 // --"?"means its an optional parameter
 const fetchData = (apiLink: string, params?: object) => {
-	console.log(params);
 	return axios.get(apiLink, params ? { params } : {});
 };
 
@@ -65,7 +64,6 @@ const getWatchListedData = async (email: any) => {
 	const data = await fetchData(`${backend}/items/fetchUserItems`, {
 		email,
 	});
-	console.log(data);
 	return data;
 };
 
