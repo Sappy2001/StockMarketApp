@@ -1,6 +1,6 @@
 const path = require("path");
-//(__dirname, "../.env") goes outside two levels to search .env
-require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+//(__dirname, ".env") goes to search .env
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 const ConnecToMongo = require("./db");
 const express = require("express");
 ConnecToMongo();
