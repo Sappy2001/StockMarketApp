@@ -7,10 +7,10 @@ const fetchData = (apiLink: string, params?: object) => {
 	return axios.get(apiLink, params ? { params } : {});
 };
 
-const stockapi = "lCErM9D7CT35jOs52grWZt4AjZIpRuHr";
+const stockapi = process.env.REACT_APP_stockapiKey;
 const getNewsData = () => {
 	return fetchData(
-		"https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=b721c529a2e4491891a80bd3119ad5e7"
+		`https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=${process.env.REACT_APP_newsApiKey}`
 	);
 };
 

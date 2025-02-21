@@ -1,6 +1,7 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 //since password has special character it needs to be ecoded
-const encodedPassword = encodeURIComponent("Sappy2001");
+const encodedPassword = encodeURIComponent(process.env.MONGODB_password);
 mongoURI = `mongodb+srv://saptangsumodak:${encodedPassword}@stockmarketcluster.4mjpj.mongodb.net/UserDB?retryWrites=true&w=majority&appName=StockMarketCluster`;
 const ConnecToMongo = async () => {
 	try {
