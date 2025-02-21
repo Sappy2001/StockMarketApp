@@ -83,7 +83,11 @@ const addToWatchList = async (email: any, symbol: any, data: any) => {
 		})
 		.catch((err) => {
 			console.log(err.response.data.message);
-			alert(err.response.data.message);
+			alert(
+				err.response.data.message.includes("E11000")
+					? "Cannot add same item"
+					: "Internal server error"
+			);
 			return err.response.data.success;
 		});
 };
