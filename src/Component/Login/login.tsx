@@ -17,6 +17,7 @@ const Login = () => {
 		setShowModal(false);
 		navigate("/");
 	};
+	const buttonRef = useRef<HTMLButtonElement | null>(null);
 
 	const [startValues, setStartValues] = useState({
 		email: "",
@@ -24,6 +25,13 @@ const Login = () => {
 	});
 
 	const [isGuestLogin, setIsGuestLogin] = useState(false);
+	//effects when user clicks on guest login
+	useEffect(() => {
+		if (isGuestLogin && buttonRef.current) {
+			console.log("clicked");
+			buttonRef.current.click();
+		}
+	}, [isGuestLogin]);
 
 	const handleLogin = async (values: { email: string; password: string }) => {
 		try {
@@ -128,7 +136,7 @@ const Login = () => {
 										flexDirection: "column",
 									}}
 								>
-									<Button id="loginbtn" type="submit">
+									<Button id="loginbtn" type="submit" ref={buttonRef}>
 										Login
 									</Button>
 									<br />
@@ -147,6 +155,7 @@ const Login = () => {
 										//using Formik objects
 										onClick={() => {
 											resetForm({ values: guestCredentials });
+											setIsGuestLogin(true);
 										}}
 									>
 										Login as Guest
