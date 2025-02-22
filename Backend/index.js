@@ -15,7 +15,11 @@ app.use(cors());
 app.get("/", (req, res) => {
 	res.send("Hello You are Connected to StockAppBackend");
 });
+//listning to item route
 app.use("/items", router);
+
+//listning to news route
+app.use("/news", require("./Routes/news"));
 
 app.listen(port, () => {
 	console.log("listening to Finup Backend:", port);

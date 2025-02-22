@@ -10,9 +10,7 @@ const stockapi = process.env.REACT_APP_stockapiKey;
 const backend = process.env.REACT_APP_BackendURL;
 
 const getNewsData = () => {
-	return fetchData(
-		`https://newsapi.org/v2/top-headlines?category=business&language=en&apiKey=${process.env.REACT_APP_newsApiKey}`
-	);
+	return fetchData("http://localhost:5000/news/fetchNews");
 };
 
 const getStockNews = () => {
