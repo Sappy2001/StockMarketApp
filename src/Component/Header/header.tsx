@@ -22,17 +22,6 @@ const Header: React.FC = () => {
 		setDropdownVisible(!isDropdownVisible);
 	};
 
-	// const handleLogout = async () => {
-	// 	try {
-	// 		await signOut(auth);
-	// 		alert("Successfully Logged Out");
-	// 		nav("/");
-	// 	} catch (error) {
-	// 		console.error("Error logging out:", error);
-	// 	}
-	// 	setDropdownVisible(false);
-	// };
-
 	return (
 		<Box sx={{ flexGrow: 1 }} style={{ width: "100%" }}>
 			<AppBar
