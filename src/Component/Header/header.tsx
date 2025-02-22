@@ -75,6 +75,14 @@ const Header: React.FC = () => {
 									About
 								</Button>
 							</Link>
+							<Link to="/news">
+								<Button
+									variant="text"
+									sx={{ mr: 2, color: "white", backgroundColor: "0F2167" }}
+								>
+									News
+								</Button>
+							</Link>
 						</>
 					)}
 

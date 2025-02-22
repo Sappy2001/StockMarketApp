@@ -29,7 +29,8 @@ const StockTable = () => {
 		setLoading(true);
 		try {
 			const res = await getStockdata();
-			setStock(res.data);
+			const sortedData = sortStocksByExchange(res.data);
+			setStock(sortedData);
 			setLoading(false);
 		} catch (error) {
 			console.log(error + "At Stock Table");
@@ -42,6 +43,16 @@ const StockTable = () => {
 	//this function gets the value whenever any event is triggered
 	const handleChange = (event: any, value: any) => {
 		setPage(value);
+	};
+
+	const sortStocksByExchange = (stocks: any) => {
+		return stocks.sort((a: any, b: any) => {
+			if (a.exchangeShortName === "NASDAQ" && b.exchangeShortName !== "NASDAQ")
+				return -1;
+			if (a.exchangeShortName !== "NASDAQ" && b.exchangeShortName === "NASDAQ")
+				return 1;
+			return 0;
+		});
 	};
 
 	const handleSearch = () => {

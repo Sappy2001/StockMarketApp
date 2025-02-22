@@ -15,7 +15,7 @@ const Login = () => {
 	const [showModal, setShowModal] = useState(true);
 	const handleClose = () => {
 		setShowModal(false);
-		navigate("/");
+		navigate("/crypto");
 	};
 	const buttonRef = useRef<HTMLButtonElement | null>(null);
 
