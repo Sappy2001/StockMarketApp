@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
@@ -18,10 +18,12 @@ const Login = () => {
 		navigate("/");
 	};
 
-	const startValues = {
+	const [startValues, setStartValues] = useState({
 		email: "",
 		password: "",
-	};
+	});
+
+	const [isGuestLogin, setIsGuestLogin] = useState(false);
 
 	const handleLogin = async (values: { email: string; password: string }) => {
 		try {
@@ -52,6 +54,13 @@ const Login = () => {
 			alert(errorMessage);
 		}
 	};
+
+	const guestCredentials = {
+		email: "guest@email.com",
+		password: "guest@123",
+	};
+
+	//google signIn
 	const handleGoogleSignup = async () => {
 		try {
 			const provider = new GoogleAuthProvider();
@@ -76,84 +85,97 @@ const Login = () => {
 			initialValues={startValues}
 			validationSchema={loginvali}
 		>
-			{({ handleSubmit, handleChange, values, errors }) => (
-				<Modal show={showModal} onHide={handleClose}>
-					<Modal.Header style={{ display: "flex", justifyContent: "center" }}>
-						<Modal.Title>Login</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<Form onSubmit={handleSubmit}>
-							<Form.Group controlId="formBasicEmail">
-								<Form.Label>Email address</Form.Label>
-								<Form.Control
-									id="email-input"
-									type="email"
-									placeholder="Enter email"
-									name="email"
-									value={values.email}
-									onChange={handleChange}
-								/>
-								{errors.email && <small>{errors.email}</small>}
-								<br />
-							</Form.Group>
-
-							<Form.Group controlId="formBasicPassword">
-								<Form.Label>Password</Form.Label>
-								<Form.Control
-									id="pass-input"
-									type="password"
-									placeholder="Password"
-									name="password"
-									value={values.password}
-									onChange={handleChange}
-								/>
-								{errors.password && <small>{errors.password}</small>}
-								<br />
-							</Form.Group>
-
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "center",
-									flexDirection: "column",
-								}}
-							>
-								<Button id="loginbtn" type="submit">
-									Login
-								</Button>
-								<br />
-								<Button variant="text" onClick={handleGoogleSignup}>
-									<img
-										src="https://th.bing.com/th/id/R.a74e23dc362abbbc61515008ede68c79?rik=Mov5CtF4MRkg1w&riu=http%3a%2f%2fwebcafe.iima.ac.in%2fimages%2fglogin.png&ehk=9hV5EenXuWJNckQxF9KZkh7rNNDgdVp88wCOQ04Qb%2bY%3d&risl=&pid=ImgRaw&r=0"
-										width="215px"
-										height="50px"
-										style={{ alignContent: "center", borderRadius: "4px" }}
+			{({ handleSubmit, handleChange, values, errors, resetForm }) => {
+				return (
+					<Modal show={showModal} onHide={handleClose}>
+						<Modal.Header style={{ display: "flex", justifyContent: "center" }}>
+							<Modal.Title>Login</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							<Form onSubmit={handleSubmit}>
+								<Form.Group controlId="formBasicEmail">
+									<Form.Label>Email address</Form.Label>
+									<Form.Control
+										id="email-input"
+										type="email"
+										placeholder="Enter email"
+										name="email"
+										value={values.email}
+										onChange={handleChange}
 									/>
-								</Button>
-							</div>
+									{errors.email && <small>{errors.email}</small>}
+									<br />
+								</Form.Group>
 
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "center",
-									flexDirection: "row",
-									alignItems: "flex-start",
-								}}
-							>
-								<small>
-									New User? <Link to="/signup">Create an account</Link>
-								</small>
-								<br />
-							</div>
-						</Form>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={handleClose}>
-							Close
-						</Button>
-					</Modal.Footer>
-				</Modal>
-			)}
+								<Form.Group controlId="formBasicPassword">
+									<Form.Label>Password</Form.Label>
+									<Form.Control
+										id="pass-input"
+										type="password"
+										placeholder="Password"
+										name="password"
+										value={values.password}
+										onChange={handleChange}
+									/>
+									{errors.password && <small>{errors.password}</small>}
+									<br />
+								</Form.Group>
+
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										flexDirection: "column",
+									}}
+								>
+									<Button id="loginbtn" type="submit">
+										Login
+									</Button>
+									<br />
+									<Button variant="text" onClick={handleGoogleSignup}>
+										<img
+											src="https://th.bing.com/th/id/R.a74e23dc362abbbc61515008ede68c79?rik=Mov5CtF4MRkg1w&riu=http%3a%2f%2fwebcafe.iima.ac.in%2fimages%2fglogin.png&ehk=9hV5EenXuWJNckQxF9KZkh7rNNDgdVp88wCOQ04Qb%2bY%3d&risl=&pid=ImgRaw&r=0"
+											width="215px"
+											height="50px"
+											style={{ alignContent: "center", borderRadius: "4px" }}
+										/>
+									</Button>
+									<Button
+										variant="dark"
+										className="my-2"
+										disabled={isGuestLogin}
+										//using Formik objects
+										onClick={() => {
+											resetForm({ values: guestCredentials });
+										}}
+									>
+										Login as Guest
+									</Button>
+								</div>
+
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										flexDirection: "row",
+										alignItems: "flex-start",
+									}}
+								>
+									<small>
+										New User? <Link to="/signup">Create an account</Link>
+									</small>
+									<br />
+								</div>
+							</Form>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button variant="secondary" onClick={handleClose}>
+								Close
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				);
+			}}
 		</Formik>
 	);
 };
