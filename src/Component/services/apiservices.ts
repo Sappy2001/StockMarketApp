@@ -10,7 +10,7 @@ const stockapi = process.env.REACT_APP_stockapiKey;
 const backend = process.env.REACT_APP_BackendURL;
 
 const getNewsData = () => {
-	return fetchData("http://localhost:5000/news/fetchNews");
+	return fetchData(`${backend}/news/fetchNews`);
 };
 
 const getStockNews = () => {
