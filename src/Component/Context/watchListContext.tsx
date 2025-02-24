@@ -79,7 +79,7 @@ export function WatchListProvider({ children }: WatchListProviderProps) {
 						};
 					}
 					return {
-						id: item.id,
+						id: item._id,
 						type: item.data.type,
 						data: data,
 					};

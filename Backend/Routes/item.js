@@ -47,7 +47,7 @@ router.delete("/deleteItem/:id", async (req, res) => {
 		if (!userItem) {
 			return res.status(404).send("Item not found");
 		}
-		if (userItem.email.toString() !== req.email) {
+		if (userItem.email.toString() !== req.body.email) {
 			return res.status(401).send("not allowed");
 		}
 		userItem = await UserItem.findByIdAndDelete(itemId);

@@ -89,7 +89,16 @@ const addToWatchList = async (email: any, symbol: any, data: any) => {
 };
 
 const deleteWatchListItem = (id: any, email: any) => {
-	return axios.delete(`http://localhost:1999/userData/${id}`, email);
+	return axios
+		.delete(`${backend}/items/deleteItem/${id}`, { data: { email } })
+		.then((res) => {
+			alert("Item Deleted");
+			console.log(res);
+		})
+		.catch((err) => {
+			alert("Internal Server Error");
+			console.log(err);
+		});
 };
 
 export {
